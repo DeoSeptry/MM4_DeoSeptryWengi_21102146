@@ -2,7 +2,7 @@
 include "koneksi.php";
 $qkelas = "select * from kelas";
 $data_kelas = $conn->query($qkelas);
-$qmahasiswa = "select m.*, k.nama as nama_kelas from mahasiswa m join kelas k on m.kelas_id = k.kelas_id";
+$qmahasiswa = "select * from mahasiswa";
 $data_mahasiswa = $conn->query($qmahasiswa);
 ?>
 <!DOCTYPE html>
@@ -60,30 +60,22 @@ $data_mahasiswa = $conn->query($qmahasiswa);
         <!-- Konten Data -->
         <h4 class="d-flex justify-content-between align-items-center mb-3">
           <span class="text-muted">Data Mahasiswa</span>
-          <span class="badge rounded-pill bg-secondary">
-            <?php echo $data_mahasiswa->num_rows; ?>
-          </span>
+          <span class="badge badge-secondary badge-pill">0</span>
         </h4>
         <?php
-        foreach ($data_mahasiswa as $index => $value) {
-          ?>
-          <ul class="list-group mb-3">
-            <li class="list-group-item d-flex justify-content-between lh-condensed">
-              <div>
-                <h6 class="my-0">
-                  <?php echo $value['nama_lengkap'] ?>
-                </h6>
-                <small class="text-muted">
-                  <?php echo $value['alamat'] ?>
-                </small>
-              </div>
-              <span class="text-muted">
-                <?php echo $value['nama_kelas'] ?>
-              </span>
-            </li>
-          </ul>
-          <?php
-        }
+          foreach($data_mahasiswa as $index => $value){
+        ?>
+        <ul class="list-group mb-3">
+          <li class="list-group-item d-flex justify-content-between lh-condensed">
+            <div>
+              <h6 class="my-0"><?php echo $value ['nama_lengkap']?></h6>
+              <small class="text-muted"><?php echo $value['alamat']?></small>
+            </div>
+            <span class="text-muted"><?php echo $value['kelas_id'] ?></span>
+          </li>
+        </ul>
+        <?php
+          }
         ?>
       </div>
       <div class="col-md-8 order-md-1">
